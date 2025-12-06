@@ -12,10 +12,10 @@ For questions, feedback, and support regarding the Physical AI & Humanoid Roboti
 ### Documentation
 Before contacting support, please check our comprehensive documentation:
 
-- [FAQ](/docs/faq) - Frequently asked questions and common issues
-- [Troubleshooting Guide](/docs/troubleshooting) - Solutions to common problems
-- [API Reference](/docs/api) - Technical documentation for all systems
-- [Video Tutorials](/docs/tutorials) - Step-by-step implementation guides
+- [About](/docs/about) - Information about the textbook
+- [Assessments](/docs/assessments) - Evaluation materials and exercises
+- [Hardware Requirements](/docs/hardware-requirements) - System requirements for projects
+- [Welcome](/docs/welcome) - Getting started guide
 
 ### Community Support
 - **Discussion Forum**: [GitHub Discussions](https://github.com/your-organization/physical-ai-book/discussions) - Ask questions and share experiences with other learners
@@ -102,7 +102,7 @@ Subscribe to our newsletter for updates:
 - **Monthly Updates**: New content, bug fixes, and feature releases
 - **Industry News**: Relevant developments in robotics and AI
 - **Community Highlights**: Featured projects and community contributions
-- **Subscribe**: [Newsletter Signup](/newsletter)
+- **Subscribe**: [GitHub Repository](https://github.com/your-organization/physical-ai-book)
 
 ### Social Media
 Follow us for real-time updates and community content:

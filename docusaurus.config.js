@@ -13,7 +13,9 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
   favicon: 'img/favicon.ico',
   organizationName: 'MubashirJatoi', // Usually your GitHub org/user name.
   projectName: 'physical-ai-book', // Usually your repo name.
-  deploymentBranch: 'gh-pages', // GitHub Pages deployment branch
+  customFields: {
+    deploymentBranch: 'gh-pages', // GitHub Pages deployment branch
+  },
 
   presets: [
     [
@@ -37,11 +39,10 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
     ],
   ],
 
-  themes: [
-    // Add search functionality
-    [
-      '@docusaurus/theme-search-algolia',
-      {
+  themeConfig:
+    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+    ({
+      algolia: {
         // The application ID provided by Algolia
         appId: 'YOUR_APP_ID',
         // Public API key: it is safe to commit it
@@ -50,12 +51,6 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
         contextualSearch: true,
         searchPagePath: 'search',
       },
-    ],
-  ],
-
-  themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
       navbar: {
         title: 'Physical AI Textbook',
         logo: {

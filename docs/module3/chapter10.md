@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-title: Chapter 10 - Isaac Foundation Models: Training and Evaluation
+title: "Chapter 10 - Isaac Foundation Models: Training and Evaluation"
 ---
 
 # Chapter 10: Isaac Foundation Models - Training and Evaluation
