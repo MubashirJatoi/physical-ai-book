@@ -1,0 +1,75 @@
+.translation-toggle {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 16px 0;
+}
+
+.toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 2px solid #0077cc;
+  background: white;
+  color: #0077cc;
+  border-radius: 24px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.toggle-btn:hover:not(:disabled) {
+  background: #0077cc;
+  color: white;
+}
+
+.toggle-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.toggle-btn.urdu-mode {
+  border-color: #ff9800;
+  color: #ff9800;
+}
+
+.toggle-btn.urdu-mode:hover:not(:disabled) {
+  background: #ff9800;
+  color: white;
+}
+
+.arrow {
+  font-weight: bold;
+}
+
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.translation-note {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #666;
+  text-align: left;
+  width: 100%;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .toggle-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .translation-note {
+    font-size: 11px;
+  }
+}

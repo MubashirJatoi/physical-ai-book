@@ -1,0 +1,144 @@
+.progress-tracker {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.progress-header h4 {
+  margin: 0 0 12px 0;
+  color: #333;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.progress-bar-container {
+  margin-bottom: 16px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 12px;
+  background: #f0f0f0;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4CAF50, #45a049);
+  transition: width 0.3s ease;
+  border-radius: 6px;
+}
+
+.progress-text {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+.progress-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.completion-status {
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.completion-status.completed {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.completion-status.in-progress {
+  background: #fff8e1;
+  color: #f57f17;
+}
+
+.mark-complete-btn {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.mark-complete-btn:hover:not(:disabled) {
+  background: #45a049;
+}
+
+.mark-complete-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.exercise-tracker h5 {
+  margin: 0 0 12px 0;
+  color: #333;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.exercise-list {
+  margin-bottom: 16px;
+}
+
+.exercise-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.exercise-item input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.exercise-item label {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+  cursor: pointer;
+}
+
+.progress-summary {
+  border-top: 1px solid #eee;
+  padding-top: 12px;
+}
+
+.progress-summary p {
+  margin: 0;
+  font-size: 13px;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .progress-tracker {
+    padding: 12px;
+  }
+
+  .progress-status {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .mark-complete-btn {
+    align-self: flex-start;
+  }
+}

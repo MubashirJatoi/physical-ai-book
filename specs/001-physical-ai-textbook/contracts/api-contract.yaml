@@ -1,0 +1,281 @@
+# API Contract for Physical AI & Humanoid Robotics Textbook
+
+## Base URL
+```
+https://api.physical-ai-textbook.com/v1
+```
+
+## Authentication
+All API endpoints require authentication using JWT tokens, except for public content access.
+
+## Endpoints
+
+### Content Management
+
+#### GET /chapters
+Retrieve all chapters with metadata
+
+**Request:**
+```
+GET /chapters
+Authorization: Bearer {jwt_token}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "ch1",
+      "title": "ROS 2 Architecture and Core Concepts",
+      "module": 1,
+      "week": 3,
+      "learningObjectives": [
+        "Understand ROS 2 architecture",
+        "Identify core concepts",
+        "Explain node communication"
+      ],
+      "prerequisites": [
+        "Basic programming knowledge",
+        "Understanding of robotics concepts"
+      ],
+      "summary": "Chapter summary...",
+      "furtherReading": [
+        "link1",
+        "link2"
+      ],
+      "previousChapterId": null,
+      "nextChapterId": "ch2",
+      "createdAt": "2025-12-06T00:00:00Z",
+      "updatedAt": "2025-12-06T00:00:00Z"
+    }
+  ]
+}
+```
+
+#### GET /chapters/{chapterId}
+Retrieve a specific chapter with full content
+
+**Request:**
+```
+GET /chapters/{chapterId}
+Authorization: Bearer {jwt_token}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "id": "ch1",
+    "title": "ROS 2 Architecture and Core Concepts",
+    "module": 1,
+    "week": 3,
+    "learningObjectives": [
+      "Understand ROS 2 architecture",
+      "Identify core concepts",
+      "Explain node communication"
+    ],
+    "prerequisites": [
+      "Basic programming knowledge",
+      "Understanding of robotics concepts"
+    ],
+    "content": "# Chapter Content in Markdown",
+    "codeExamples": [
+      {
+        "id": "code1",
+        "title": "Node Example",
+        "language": "python",
+        "code": "print('Hello World')",
+        "explanation": "This is a simple example..."
+      }
+    ],
+    "exercises": [
+      {
+        "id": "ex1",
+        "title": "Exercise 1",
+        "description": "Exercise description...",
+        "difficulty": "beginner",
+        "expectedOutput": "Expected output..."
+      }
+    ],
+    "summary": "Chapter summary...",
+    "furtherReading": [
+      "link1",
+      "link2"
+    ],
+    "previousChapterId": null,
+    "nextChapterId": "ch2",
+    "createdAt": "2025-12-06T00:00:00Z",
+    "updatedAt": "2025-12-06T00:00:00Z"
+  }
+}
+```
+
+### User Management
+
+#### POST /auth/register
+Register a new user
+
+**Request:**
+```
+POST /auth/register
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "secure_password",
+  "userType": "student" // or "educator"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "user": {
+      "id": "user123",
+      "name": "John Doe",
+      "email": "john@example.com",
+      "userType": "student",
+      "preferences": {
+        "language": "en",
+        "theme": "light"
+      },
+      "createdAt": "2025-12-06T00:00:00Z",
+      "updatedAt": "2025-12-06T00:00:00Z"
+    },
+    "token": "jwt_token_here"
+  }
+}
+```
+
+### Progress Tracking
+
+#### GET /progress/{userId}
+Retrieve user progress
+
+**Request:**
+```
+GET /progress/{userId}
+Authorization: Bearer {jwt_token}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "userId": "user123",
+    "progress": [
+      {
+        "chapterId": "ch1",
+        "completed": true,
+        "progressPercentage": 100,
+        "lastAccessed": "2025-12-06T10:30:00Z",
+        "exercisesCompleted": ["ex1", "ex2"]
+      }
+    ],
+    "totalChapters": 17,
+    "completedChapters": 1,
+    "overallProgress": 5.9
+  }
+}
+```
+
+#### PUT /progress/{userId}/chapters/{chapterId}
+Update chapter progress
+
+**Request:**
+```
+PUT /progress/{userId}/chapters/{chapterId}
+Authorization: Bearer {jwt_token}
+Content-Type: application/json
+
+{
+  "completed": true,
+  "progressPercentage": 100,
+  "exercisesCompleted": ["ex1", "ex2"]
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "userId": "user123",
+    "chapterId": "ch1",
+    "completed": true,
+    "progressPercentage": 100,
+    "exercisesCompleted": ["ex1", "ex2"],
+    "updatedAt": "2025-12-06T10:30:00Z"
+  }
+}
+```
+
+### RAG Chatbot Integration
+
+#### POST /chatbot/query
+Submit a query to the RAG system
+
+**Request:**
+```
+POST /chatbot/query
+Authorization: Bearer {jwt_token}
+Content-Type: application/json
+
+{
+  "query": "Explain ROS 2 nodes and topics",
+  "userId": "user123",
+  "context": "chapter1"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "query": "Explain ROS 2 nodes and topics",
+    "answer": "A detailed answer based on textbook content...",
+    "confidence": 0.95,
+    "sources": [
+      {
+        "chapterId": "ch2",
+        "title": "Nodes, Topics, Services, and Actions",
+        "section": "Nodes and Topics"
+      }
+    ],
+    "timestamp": "2025-12-06T10:30:00Z"
+  }
+}
+```
+
+### Translation Service
+
+#### GET /translations/{contentId}/{language}
+Retrieve translated content
+
+**Request:**
+```
+GET /translations/{contentId}/{language}
+Authorization: Bearer {jwt_token}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "contentId": "ch1",
+    "language": "ur",
+    "translatedContent": "مترجم ہوئی مواد...",
+    "status": "approved",
+    "updatedAt": "2025-12-06T00:00:00Z"
+  }
+}
+```
