@@ -3,7 +3,20 @@ sidebar_position: 4
 title: Assessments
 ---
 
+import ChatbotWidget from '@site/src/components/ChatbotWidget';
+import ProgressTracker from '@site/src/components/ProgressTracker';
+import UrduTranslationToggle from '@site/src/components/UrduTranslationToggle';
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import ImageGallery from '@site/src/components/ImageGallery';
+import VideoEmbed from '@site/src/components/VideoEmbed';
+import CodePlayground from '@site/src/components/CodePlayground';
+
 # Assessments
+
+<ChatbotWidget />
+<ProgressTracker chapterId="assessments" />
+<UrduTranslationToggle />
+<PersonalizationButton />
 
 This page provides information about the assessment structure and criteria for the Physical AI & Humanoid Robotics course.
 

@@ -3,7 +3,20 @@ sidebar_position: 5
 title: Chapter 15 - Embodied AI and Foundation Models
 ---
 
+import ChatbotWidget from '@site/src/components/ChatbotWidget';
+import ProgressTracker from '@site/src/components/ProgressTracker';
+import UrduTranslationToggle from '@site/src/components/UrduTranslationToggle';
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import ImageGallery from '@site/src/components/ImageGallery';
+import VideoEmbed from '@site/src/components/VideoEmbed';
+import CodePlayground from '@site/src/components/CodePlayground';
+
 # Chapter 15: Embodied AI and Foundation Models
+
+<ChatbotWidget />
+<ProgressTracker chapterId="module4-chapter15" />
+<UrduTranslationToggle />
+<PersonalizationButton />
 
 ## Learning Objectives
 

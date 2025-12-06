@@ -3,7 +3,20 @@ sidebar_position: 1
 title: Week 1 - Introduction to Physical AI
 ---
 
+import ChatbotWidget from '@site/src/components/ChatbotWidget';
+import ProgressTracker from '@site/src/components/ProgressTracker';
+import UrduTranslationToggle from '@site/src/components/UrduTranslationToggle';
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import ImageGallery from '@site/src/components/ImageGallery';
+import VideoEmbed from '@site/src/components/VideoEmbed';
+import CodePlayground from '@site/src/components/CodePlayground';
+
 # Week 1 - Introduction to Physical AI
+
+<ChatbotWidget />
+<ProgressTracker chapterId="intro-week1" />
+<UrduTranslationToggle />
+<PersonalizationButton />
 
 ## Learning Objectives
 

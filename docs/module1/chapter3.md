@@ -3,7 +3,18 @@ sidebar_position: 3
 title: Chapter 3 - Building ROS 2 Packages with Python
 ---
 
+import ProgressTracker from '@site/src/components/ProgressTracker';
+import UrduTranslationToggle from '@site/src/components/UrduTranslationToggle';
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import ImageGallery from '@site/src/components/ImageGallery';
+import VideoEmbed from '@site/src/components/VideoEmbed';
+import CodePlayground from '@site/src/components/CodePlayground';
+
 # Chapter 3 - Building ROS 2 Packages with Python
+
+<ProgressTracker chapterId="module1-chapter3" />
+<UrduTranslationToggle />
+<PersonalizationButton />
 
 ## Learning Objectives
 

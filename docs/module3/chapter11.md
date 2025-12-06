@@ -3,7 +3,20 @@ sidebar_position: 3
 title: Chapter 11 - Reinforcement Learning for Robot Control
 ---
 
+import ChatbotWidget from '@site/src/components/ChatbotWidget';
+import ProgressTracker from '@site/src/components/ProgressTracker';
+import UrduTranslationToggle from '@site/src/components/UrduTranslationToggle';
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import ImageGallery from '@site/src/components/ImageGallery';
+import VideoEmbed from '@site/src/components/VideoEmbed';
+import CodePlayground from '@site/src/components/CodePlayground';
+
 # Chapter 11 - Reinforcement Learning for Robot Control
+
+<ChatbotWidget />
+<ProgressTracker chapterId="module3-chapter11" />
+<UrduTranslationToggle />
+<PersonalizationButton />
 
 ## Learning Objectives
 

@@ -3,7 +3,20 @@ sidebar_position: 3
 title: Hardware Requirements
 ---
 
+import ChatbotWidget from '@site/src/components/ChatbotWidget';
+import ProgressTracker from '@site/src/components/ProgressTracker';
+import UrduTranslationToggle from '@site/src/components/UrduTranslationToggle';
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import ImageGallery from '@site/src/components/ImageGallery';
+import VideoEmbed from '@site/src/components/VideoEmbed';
+import CodePlayground from '@site/src/components/CodePlayground';
+
 # Hardware Requirements
+
+<ChatbotWidget />
+<ProgressTracker chapterId="hardware-requirements" />
+<UrduTranslationToggle />
+<PersonalizationButton />
 
 This textbook covers both theoretical concepts and practical implementations. This page outlines the hardware requirements for different aspects of the course.
 

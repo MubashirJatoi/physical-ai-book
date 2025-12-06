@@ -3,7 +3,20 @@ sidebar_position: 4
 title: Chapter 4 - Launch Files and Parameter Management
 ---
 
+import ChatbotWidget from '@site/src/components/ChatbotWidget';
+import ProgressTracker from '@site/src/components/ProgressTracker';
+import UrduTranslationToggle from '@site/src/components/UrduTranslationToggle';
+import PersonalizationButton from '@site/src/components/PersonalizationButton';
+import ImageGallery from '@site/src/components/ImageGallery';
+import VideoEmbed from '@site/src/components/VideoEmbed';
+import CodePlayground from '@site/src/components/CodePlayground';
+
 # Chapter 4 - Launch Files and Parameter Management
+
+<ChatbotWidget />
+<ProgressTracker chapterId="module1-chapter4" />
+<UrduTranslationToggle />
+<PersonalizationButton />
 
 ## Learning Objectives
 
