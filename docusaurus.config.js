@@ -10,6 +10,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
   baseUrl: '/physical-ai-book/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
+  trailingSlash: false,
   favicon: 'img/favicon.ico',
   organizationName: 'MubashirJatoi', // Usually your GitHub org/user name.
   projectName: 'physical-ai-book', // Usually your repo name.
