@@ -5,7 +5,9 @@
       "Bash(dir specs /b)",
       "Bash(dir specs)",
       "Bash(powershell -ExecutionPolicy Bypass -File \".specify/scripts/powershell/check-prerequisites.ps1\" -Json -FeatureDir \"specs/001-physical-ai-textbook\" -IncludeTasks)",
-      "Bash(git add .)"
+      "Bash(git add .)",
+      "Bash(git commit -m \"feat: integrate backend with frontend, fix API service, update chatbot widget with selected text functionality, fix UUID and CORS issues\")",
+      "Bash(git push origin main)"
     ],
     "deny": [],
     "ask": []
