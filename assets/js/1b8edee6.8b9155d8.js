@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkphysical_ai_book=globalThis.webpackChunkphysical_ai_book||[]).push([[6455],{9895:(e,a,l)=>{l.d(a,{A:()=>h});var c=l(6540),i=l(3400),n=l(6424);function h(e){return c.createElement(i.A,e,e.children,c.createElement(n.A,null))}}}]);
