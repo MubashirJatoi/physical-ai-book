@@ -45,6 +45,12 @@ export const chatFullBook = async (query, sessionId = null, userId = null) => {
       throw new Error('Query cannot be empty');
     }
 
+    console.log('Making API call to:', `${BACKEND_BASE_URL}/api/chat`, 'with data:', {
+      query: sanitizedQuery,
+      session_id,
+      user_id: userId || null
+    });
+
     const response = await fetch(`${BACKEND_BASE_URL}/api/chat`, {
       method: 'POST',
       headers: {
@@ -57,16 +63,23 @@ export const chatFullBook = async (query, sessionId = null, userId = null) => {
       })
     });
 
+    console.log('Response received:', response.status, response.statusText);
+
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+      const errorText = await response.text().catch(() => 'Unknown error');
+      console.error('API call failed with response:', errorText);
+      throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
     }
 
     const data = await response.json();
+    console.log('API response data:', data);
     return data;
   } catch (error) {
     console.error('Error in full-book chat:', error);
-    throw error;
+    // Re-throw with more context about the URL being used
+    const fullError = new Error(`Failed to connect to backend at ${BACKEND_BASE_URL}/api/chat. ${error.message}`);
+    fullError.originalError = error;
+    throw fullError;
   }
 };
 
@@ -85,6 +98,13 @@ export const chatSelectedText = async (selectedText, query, sessionId = null, us
       throw new Error('Query cannot be empty');
     }
 
+    console.log('Making selected-text API call to:', `${BACKEND_BASE_URL}/api/chat/selected`, 'with data:', {
+      selected_text: sanitizedSelectedText,
+      query: sanitizedQuery,
+      session_id,
+      user_id: userId || null
+    });
+
     const response = await fetch(`${BACKEND_BASE_URL}/api/chat/selected`, {
       method: 'POST',
       headers: {
@@ -98,30 +118,43 @@ export const chatSelectedText = async (selectedText, query, sessionId = null, us
       })
     });
 
+    console.log('Response received:', response.status, response.statusText);
+
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+      const errorText = await response.text().catch(() => 'Unknown error');
+      console.error('API call failed with response:', errorText);
+      throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
     }
 
     const data = await response.json();
+    console.log('API response data:', data);
     return data;
   } catch (error) {
     console.error('Error in selected-text chat:', error);
-    throw error;
+    // Re-throw with more context about the URL being used
+    const fullError = new Error(`Failed to connect to backend at ${BACKEND_BASE_URL}/api/chat/selected. ${error.message}`);
+    fullError.originalError = error;
+    throw fullError;
   }
 };
 
 // Health check for the backend
 export const checkHealth = async () => {
   try {
+    console.log('Making health check to:', `${BACKEND_BASE_URL}/api/health`);
     const response = await fetch(`${BACKEND_BASE_URL}/api/health`);
+    console.log('Health check response:', response.status, response.statusText);
     if (!response.ok) {
-      return { status: 'unhealthy', error: `Health check failed with status: ${response.status}` };
+      const errorText = await response.text().catch(() => 'Unknown error');
+      console.error('Health check failed with response:', errorText);
+      return { status: 'unhealthy', error: `Health check failed with status: ${response.status}, message: ${errorText}` };
     }
-    return await response.json();
+    const data = await response.json();
+    console.log('Health check data:', data);
+    return data;
   } catch (error) {
     console.error('Health check failed:', error);
-    return { status: 'unhealthy', error: error.message };
+    return { status: 'unhealthy', error: `Failed to connect to backend health endpoint at ${BACKEND_BASE_URL}/api/health. ${error.message}` };
   }
 };
 

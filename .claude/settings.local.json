@@ -11,7 +11,8 @@
       "Bash(npm run build)",
       "Bash(npm run deploy)",
       "Bash(set GIT_USER=%USERNAME%)",
-      "Bash(npx cross-env GIT_USER=MubashirJatoi npm run deploy)"
+      "Bash(npx cross-env GIT_USER=MubashirJatoi npm run deploy)",
+      "Bash(git commit -m \"update: connect frontend to deployed Hugging Face backend\")"
     ],
     "deny": [],
     "ask": []

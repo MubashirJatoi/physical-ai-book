@@ -12,7 +12,7 @@ const getBackendUrl = () => {
   // Replace with your actual Hugging Face Space URL when deploying
   // Example: https://your-username-chatbot.hf.space
   return process.env.NODE_ENV === 'production'
-    ? 'https://your-huggingface-space-url.hf.space'  // Update this with your actual deployment URL
+    ? 'https://mubashirjatoi-rag-chatbot.hf.space'  // Update this with your actual deployment URL
     : 'http://localhost:8000';  // Default for local development
 };
 
