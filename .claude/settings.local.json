@@ -10,7 +10,8 @@
       "Bash(git push origin main)",
       "Bash(npm run build)",
       "Bash(npm run deploy)",
-      "Bash(set GIT_USER=%USERNAME%)"
+      "Bash(set GIT_USER=%USERNAME%)",
+      "Bash(npx cross-env GIT_USER=MubashirJatoi npm run deploy)"
     ],
     "deny": [],
     "ask": []
