@@ -4,7 +4,8 @@
       "Bash(powershell -ExecutionPolicy Bypass -File \".specify/scripts/powershell/check-prerequisites.ps1\" -Json -RequireTasks -IncludeTasks)",
       "Bash(dir specs /b)",
       "Bash(dir specs)",
-      "Bash(powershell -ExecutionPolicy Bypass -File \".specify/scripts/powershell/check-prerequisites.ps1\" -Json -FeatureDir \"specs/001-physical-ai-textbook\" -IncludeTasks)"
+      "Bash(powershell -ExecutionPolicy Bypass -File \".specify/scripts/powershell/check-prerequisites.ps1\" -Json -FeatureDir \"specs/001-physical-ai-textbook\" -IncludeTasks)",
+      "Bash(git add .)"
     ],
     "deny": [],
     "ask": []

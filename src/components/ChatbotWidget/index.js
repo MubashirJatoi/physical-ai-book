@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import './ChatbotWidget.css';
+import { chatFullBook, chatSelectedText } from '../../services/api';
+import { addMessageToSession, getConversationHistory } from '../../services/session';
 
 const ChatbotWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedText, setSelectedText] = useState('');
 
   const toggleChat = () => {
     setIsOpen(!isOpen);
   };
 
-  const sendMessage = async () => {
+  // Function to handle full-book chat
+  const sendFullBookMessage = async () => {
     if (!inputValue.trim() || isLoading) return;
 
     const userMessage = {
@@ -26,34 +30,93 @@ const ChatbotWidget = () => {
     setIsLoading(true);
 
     try {
-      // In a real implementation, this would call the backend API
-      // const response = await fetch('/api/chatbot/query', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify({
-      //     query: inputValue,
-      //     userId: 'current-user-id', // Would come from auth context
-      //     context: 'current-chapter' // Would come from current page context
-      //   })
-      // });
-      // const data = await response.json();
+      // Call the backend API for full-book chat
+      const response = await chatFullBook(inputValue);
 
-      // For demo purposes, simulate an API response
-      setTimeout(() => {
-        const botMessage = {
-          id: Date.now() + 1,
-          text: `I understand you're asking about "${inputValue}". This is a sample response from the AI-powered chatbot. In a full implementation, this would query the textbook content using RAG (Retrieval Augmented Generation) to provide accurate answers based on the chapter content.`,
-          sender: 'bot',
-          timestamp: new Date().toISOString()
-        };
-        setMessages(prev => [...prev, botMessage]);
-        setIsLoading(false);
-      }, 1000);
-    } catch (error) {
-      console.error('Error sending message:', error);
+      const botMessage = {
+        id: Date.now() + 1,
+        text: response.answer,
+        sender: 'bot',
+        timestamp: new Date().toISOString(),
+        sources: response.sources || [] // Store sources for display
+      };
+
+      // Add both user and bot messages to session for context
+      addMessageToSession(userMessage);
+      addMessageToSession(botMessage);
+
+      setMessages(prev => [...prev, botMessage]);
       setIsLoading(false);
+    } catch (error) {
+      console.error('Error sending message to backend:', error);
+
+      // Create an error message to show to the user
+      const errorMessage = {
+        id: Date.now() + 1,
+        text: `I'm sorry, but I encountered an error while processing your request. ${error.message || 'Please try again later.'}`,
+        sender: 'bot',
+        timestamp: new Date().toISOString()
+      };
+
+      setMessages(prev => [...prev, errorMessage]);
+      setIsLoading(false);
+    }
+  };
+
+  // Function to handle selected-text chat
+  const sendSelectedTextMessage = async () => {
+    if (!inputValue.trim() || !selectedText.trim() || isLoading) return;
+
+    const userMessage = {
+      id: Date.now(),
+      text: `Selected text: ${selectedText}\n\nQuestion: ${inputValue}`,
+      sender: 'user',
+      timestamp: new Date().toISOString()
+    };
+
+    setMessages(prev => [...prev, userMessage]);
+    setIsLoading(true);
+
+    try {
+      // Call the backend API for selected-text chat
+      const response = await chatSelectedText(selectedText, inputValue);
+
+      const botMessage = {
+        id: Date.now() + 1,
+        text: response.answer,
+        sender: 'bot',
+        timestamp: new Date().toISOString(),
+        sources: response.sources || [] // Store sources for display
+      };
+
+      // Add both user and bot messages to session for context
+      addMessageToSession(userMessage);
+      addMessageToSession(botMessage);
+
+      setMessages(prev => [...prev, botMessage]);
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error sending selected text message to backend:', error);
+
+      // Create an error message to show to the user
+      const errorMessage = {
+        id: Date.now() + 1,
+        text: `I'm sorry, but I encountered an error while processing your request. ${error.message || 'Please try again later.'}`,
+        sender: 'bot',
+        timestamp: new Date().toISOString()
+      };
+
+      setMessages(prev => [...prev, errorMessage]);
+      setIsLoading(false);
+    }
+  };
+
+  // Function to handle sending a message based on whether there's selected text
+  const sendMessage = async () => {
+    if (selectedText) {
+      await sendSelectedTextMessage();
+    } else {
+      await sendFullBookMessage();
     }
   };
 
@@ -62,6 +125,11 @@ const ChatbotWidget = () => {
       e.preventDefault();
       sendMessage();
     }
+  };
+
+  // Function to clear selected text
+  const clearSelectedText = () => {
+    setSelectedText('');
   };
 
   return (
@@ -86,6 +154,12 @@ const ChatbotWidget = () => {
                   className={`chatbot-message ${message.sender}-message`}
                 >
                   <div className="message-text">{message.text}</div>
+                  {/* Display sources if they exist in the bot message */}
+                  {message.sender === 'bot' && message.sources && message.sources.length > 0 && (
+                    <div className="message-sources">
+                      <small>Sources: {message.sources.map(source => `${source.chapter} - ${source.section}`).join(', ')}</small>
+                    </div>
+                  )}
                   <div className="message-timestamp">
                     {new Date(message.timestamp).toLocaleTimeString()}
                   </div>
@@ -105,20 +179,35 @@ const ChatbotWidget = () => {
             )}
           </div>
           <div className="chatbot-input">
+            {/* Display selected text if available */}
+            {selectedText && (
+              <div className="selected-text-preview">
+                <small><strong>Context:</strong> {selectedText.substring(0, 100)}{selectedText.length > 100 ? '...' : ''}</small>
+                <button
+                  className="selected-text-button"
+                  onClick={clearSelectedText}
+                  title="Clear selected text context"
+                >
+                  Clear
+                </button>
+              </div>
+            )}
             <textarea
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="Ask a question about this chapter..."
+              placeholder={selectedText ? "Ask a question about the selected text..." : "Ask a question about this chapter..."}
               rows="2"
             />
-            <button
-              onClick={sendMessage}
-              disabled={isLoading || !inputValue.trim()}
-              className="send-button"
-            >
-              Send
-            </button>
+            <div className="button-group">
+              <button
+                onClick={sendMessage}
+                disabled={isLoading || !inputValue.trim()}
+                className="send-button"
+              >
+                Send
+              </button>
+            </div>
           </div>
         </div>
       ) : (
